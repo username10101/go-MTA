@@ -1,0 +1,2 @@
+tranfser_server = "smtp.mail.ru:25"
+smtp_headers = ""

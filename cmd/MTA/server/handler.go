@@ -21,7 +21,7 @@ const (
 	SERVER_TYPE string = "tcp"
 )
 
-func Handle(connectionFunc func(string, SMTPData)) {
+func Handle(connectionFunc func(string, string, string)) {
 	listening, err := net.Listen(SERVER_TYPE, net.JoinHostPort(SERVER_HOST, SERVER_PORT))
 	if err != nil {
 		fmt.Println("Error listening:", err.Error())
@@ -41,7 +41,7 @@ func Handle(connectionFunc func(string, SMTPData)) {
 	}
 }
 
-func handleRequest(conn net.Conn, connectionFunc func(string, SMTPData)) {
+func handleRequest(conn net.Conn, connectionFunc func(string, string, string)) {
 	buf := make([]byte, 1024)
 
 	data := SMTPData{}
@@ -72,5 +72,5 @@ func handleRequest(conn net.Conn, connectionFunc func(string, SMTPData)) {
 		}
 	}
 
-	connectionFunc("smtp.mail.ru:25", data)
+	connectionFunc(data.FROM, data.RCPT, data.DATA)
 }
