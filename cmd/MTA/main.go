@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "./server"
 
 func main() {
-	fmt.Print(1)
+	server.Handle(client.SendSMTP)
 }
